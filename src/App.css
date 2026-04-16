@@ -1,0 +1,95 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f4f6f9;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+
+/* ===== ROOT WRAPPER ===== */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== MAIN PAGE CONTENT ===== */
+main {
+  flex: 1;
+  padding-top: 90px;
+  /* space for header */
+}
+
+/* ===== GLOBAL HEADING ===== */
+h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 30px 0;
+}
+
+/* ===== GLOBAL BUTTON ===== */
+button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* ===== LINKS ===== */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+  font-size: 2rem;
+}
+
+h3, h4 {
+  color: #333;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 5px 5px 0 0;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}

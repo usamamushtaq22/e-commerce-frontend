@@ -1,0 +1,54 @@
+/* Header.css */
+
+/* Header main */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #18242f;
+  padding: 15px 25px;
+  box-shadow: 0 2px 6px rgba(15, 16, 18, 0.744);
+}
+
+/* Logo */
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Nav links */
+nav a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+
+
+/* 🔥 Badge (bubble style) */
+.badge {
+  position: absolute;
+  top: -14px;
+  right: -22px;
+
+  background-color: red;
+  color: white;
+
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 0.7rem;
+  font-weight: bold;
+
+  min-width: 25px;
+  text-align: center;
+}

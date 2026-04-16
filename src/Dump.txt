@@ -1,0 +1,2063 @@
+Product modal
+
+// const mongoose = require("mongoose");
+
+// const productSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true
+//   },
+
+//   price: {
+//     type: Number,
+//     required: true
+//   },
+
+//   image: {
+//     type: String,
+//     required: true
+//   },
+
+//   // 👇 important for toggle system
+//   priceOptions: {
+//     type: [Number], // array of prices
+//     default: []
+//   }
+
+// }, { timestamps: true });
+
+// module.exports = mongoose.model("Product", productSchema);
+
+SSH Password
+ed25519
+
+
+
+
+
+
+
+
+
+
+import shoesImg from "../assets/shoes1.png";
+import watchImg from "../assets/ghari.png";
+import watchimg from "../assets/watch4.png";
+import shoeimg from "../assets/Shoes-1.png";
+
+const products = [
+  {
+    id: 1,
+    name: "Shoes",
+    priceOptions: [42, 40, 30, 20],
+    toggleIndex: -1,
+    price: 50,
+    originalPrice: 50,
+    image: shoesImg
+  },
+  {
+    id: 2,
+    name: "Shoes Premium",
+    priceOptions: [430, 400, 300, 200],
+    toggleIndex: -1,
+    price: 5000,
+    originalPrice: 5000,
+    image: shoeimg
+  },
+  {
+    id: 3,
+    name: "Watch",
+    priceOptions: [420, 400, 300, 100],
+    toggleIndex: -1,
+    price: 500,
+    originalPrice: 500,
+    image: watchImg
+  },
+  {
+    id: 4,
+    name: "Watch Premium",
+    priceOptions: [3050, 2000, 1000, 500],
+    toggleIndex: -1,
+    price: 5000,
+    originalPrice: 5000,
+    image: watchimg
+  }
+];
+
+export default products;  
+
+
+
+// import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+// import { useState, useEffect } from "react";
+// import productsData from "./Data/Product";
+// import Header from "./Components/Header";
+// import Home from "./Pages/Home";
+// import Cart from "./Pages/Cart";
+// import './App.css';
+
+// function App() {
+//   const [products, setProducts] = useState(() => {
+//   const saved = localStorage.getItem("products");
+//   return saved ? JSON.parse(saved) : productsData;
+// });
+
+// const [cart, setCart] = useState(() => {
+//   const saved = localStorage.getItem("cart");
+//   return saved ? JSON.parse(saved) : [];
+// });
+
+// useEffect(() => {
+//   localStorage.setItem("products", JSON.stringify(products));
+// }, [products]);
+
+// useEffect(() => {
+//   localStorage.setItem("cart", JSON.stringify(cart));
+// }, [cart]);
+
+//   // Toggle price function
+// function togglePrice(id) {
+//   let newPrice;
+
+//   setProducts(prev =>
+//     prev.map(p => {
+//       if (p.id === id) {
+//         const options = p.priceOptions || [];
+//         const discountPrice = Math.round(p.originalPrice * 0.9);
+//         const steps = [p.originalPrice, discountPrice, ...options];
+
+//         let nextIndex = (p.toggleIndex ?? -1) + 1;
+//         if (nextIndex >= steps.length) nextIndex = 0;
+
+//         newPrice = steps[nextIndex];
+
+//         return {
+//           ...p,
+//           toggleIndex: nextIndex,
+//           currentPrice: newPrice
+//         };
+//       }
+//       return p;
+//     })
+//   );
+
+//   // 🔥 cart ko bhi update karo
+//   setCart(prev =>
+//     prev.map(item =>
+//       item.id === id
+//         ? { ...item, currentPrice: newPrice }
+//         : item
+//     )
+//   );  
+// }
+
+
+//   // function togglePrice(id) {
+//   //   setProducts(prev =>
+//   //     prev.map(p => {
+//   //       if (p.id === id) {
+//   //         const options = p.priceOptions || [];
+//   //         const discountPrice = Math.round(p.originalPrice * 0.9);
+//   //         const steps = [p.originalPrice, discountPrice, ...options];
+
+//   //         let nextIndex = (p.toggleIndex ?? -1) + 1;
+//   //         if (nextIndex >= steps.length) nextIndex = 0;
+
+//   //         return { ...p, toggleIndex: nextIndex, currentPrice: steps[nextIndex] };
+//   //       }
+//   //       return p;
+//   //     })
+//   //   );
+//   // }
+//   function updatePrice(id) {
+//     setProducts(prev =>
+//       prev.map(p => {
+//         if (p.id === id) {
+//           const discountPrice = Math.round(p.originalPrice * 0.9);
+//           return {
+//             ...p,
+//             currentPrice: discountPrice,
+//             toggleIndex: 1
+//           };
+//         }
+//         return p;
+//       })
+//     );
+    
+//   }
+
+//   // Add to cart
+// function addToCart(id) {
+//   const product = products.find(p => p.id === id);
+//   if (!product) return;
+
+//   const exist = cart.find(item => item.id === id);
+
+//   const currentPrice = product.currentPrice ?? product.price;
+
+//   if (exist) {
+//     setCart(cart.map(item =>
+//       item.id === id
+//         ? { ...item, qty: item.qty + 1 }
+//         : item
+//     ));
+//   } else {
+//     setCart([
+//       ...cart,
+//       {
+//         id,
+//         qty: 1,
+//         currentPrice
+//       }
+//     ]);
+//   }
+// }
+
+//   // function addToCart(id) {
+//   //   const product = products.find(p => p.id === id);
+//   //   if (!product) return;
+
+//   //   const exist = cart.find(item => item.id === id);
+//   //   if (exist) {
+//   //     setCart(cart.map(item =>
+//   //       item.id === id ? { ...item, qty: item.qty + 1 } : item
+//   //     ));
+//   //   } else {
+//   //     setCart([...cart, { id, qty: 1 }]);
+//   //   }
+//   // }
+
+//   // Update quantity
+//   // function updateQuantity(id, qty) {
+//   //   if (qty <= 0) return removeFromCart(id);
+//   //   setCart(cart.map(item => item.id === id ? { ...item, qty } : item));
+//   // }
+// function updateQuantity(id, qty) {
+//   setCart(cart.map(item => {
+//     if (item.id === id) {
+//       // ✅ Minimum qty 1
+//       const newQty = qty < 1 ? 1 : qty;
+//       return { ...item, qty: newQty };
+//     }
+//     return item;
+//   }));
+// }
+//   // Remove from cart
+//   function removeFromCart(id) {
+//     setCart(cart.filter(item => item.id !== id));
+//   }
+
+//   return (
+//     <Router>
+//       {/* Header always visible */}
+//       <Header cartCount={cart.reduce((acc, item) => acc + item.qty, 0)} />
+
+//       {/* Navigation links */}
+
+
+//       {/* Routes */}
+//       <Routes>
+//         <Route
+//           path="/"
+//           element={
+//             <>
+
+//               <Home
+//                 products={products}
+//                 addToCart={addToCart}
+//                 togglePrice={togglePrice}
+//                 updatePrice={updatePrice}
+//               />
+//             </>
+//           }
+//         />
+//         <Route
+//           path="/cart"
+//           element={
+//             <>
+              
+//               <Cart
+//                 cart={cart}
+//                 products={products}
+//                 updateQuantity={updateQuantity}
+//                 removeFromCart={removeFromCart}
+//                 togglePrice={togglePrice}
+//               />
+//             </>
+//           }
+//         />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// import { useState } from "react";
+// import productsData from "./Data/Product";
+// import Header from "./Components/Header";
+// import Home from "./Pages/Home";
+// import Cart from "./Pages/Cart";
+// import './App.css';
+
+// function App() {
+//   const [products, setProducts] = useState(productsData);
+//   const [cart, setCart] = useState([]);
+
+//   // Toggle price function
+//   function togglePrice(id) {
+//     setProducts(prev =>
+//       prev.map(p => {
+//         if (p.id === id) {
+//           const options = p.priceOptions || [];
+//           const discountPrice = Math.round(p.originalPrice * 0.9);
+//           const steps = [p.originalPrice, discountPrice, ...options];
+
+//           let nextIndex = (p.toggleIndex ?? -1) + 1;
+//           if (nextIndex >= steps.length) nextIndex = 0;
+
+//           return { ...p, toggleIndex: nextIndex, currentPrice: steps[nextIndex] };
+//         }
+//         return p;
+//       })
+//     );
+//   }
+
+//   // Add to cart
+//   function addToCart(id) {
+//     const product = products.find(p => p.id === id);
+//     if (!product) return;
+
+//     const exist = cart.find(item => item.id === id);
+//     if (exist) {
+//       setCart(cart.map(item =>
+//         item.id === id ? { ...item, qty: item.qty + 1 } : item
+//       ));
+//     } else {
+//       setCart([...cart, { id, qty: 1 }]);
+//     }
+//   }
+
+//   // Update quantity
+//   function updateQuantity(id, qty) {
+//     if (qty <= 0) return removeFromCart(id);
+//     setCart(cart.map(item => item.id === id ? { ...item, qty } : item));
+//   }
+
+//   // Remove from cart
+//   function removeFromCart(id) {
+//     setCart(cart.filter(item => item.id !== id));
+//   }
+
+//   return (
+//     <Router>
+//       {/* Header always visible */}
+//       <Header cart={cart} products={products} />
+
+//       {/* Navigation links */}
+//       <nav style={{ textAlign: 'center', margin: '15px 0' }}>
+//         <Link to="/" style={{ marginRight: '20px' }}>Home</Link>
+//         <Link to="/cart">Cart</Link>
+//       </nav>
+
+//       {/* Routes */}
+//       <Routes>
+//         <Route
+//           path="/"
+//           element={
+//             <>
+//               <h1 style={{ textAlign: 'center' }}>Products</h1>
+//               <Home products={products} addToCart={addToCart} togglePrice={togglePrice} />
+//             </>
+//           }
+//         />
+//         <Route
+//           path="/cart"
+//           element={
+//             <>
+//               <h1 style={{ textAlign: 'center' }}>Cart</h1>
+//               <Cart
+//                 cart={cart}
+//                 products={products}
+//                 updateQuantity={updateQuantity}
+//                 removeFromCart={removeFromCart}
+//                 togglePrice={togglePrice}
+//               />
+//             </>
+//           }
+//         />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+// function App() {
+
+
+
+
+//   const [products, setProducts] = useState(() => {
+//     const saved = localStorage.getItem("products");
+//     return saved ? JSON.parse(saved) : productsData;
+//   });
+//   // const [products, setProducts] = useState(productsData);
+
+//   const [cart, setCart] = useState(() => {
+//     const savedCart = localStorage.getItem("cart");
+//     return savedCart ? JSON.parse(savedCart) : [];
+//   });
+
+//   useEffect(() => {
+//     localStorage.setItem("products", JSON.stringify(products));
+//     localStorage.setItem("cart", JSON.stringify(cart));
+//   }, [products, cart]);
+
+//   // useEffect(() => {
+//   //   localStorage.setItem("products", JSON.stringify(products));
+//   // }, [products]);
+//   // useEffect(() => {
+//   //   localStorage.setItem("cart", JSON.stringify(cart));
+//   // }, [cart]);
+
+
+
+
+//   function addToCart(product) {
+//     setCart(prevCart => {
+//       const exist = prevCart.find(item => item.id === product.id);
+
+//       if (exist) {
+//         return prevCart.map(item =>
+//           item.id === product.id
+//             ? {
+//               ...item,
+//               qty: item.qty + 1,
+//               priceHistory: [...item.priceHistory, product.price]
+//             }
+//             : item
+//         );
+//       } else {
+//         return [...prevCart, { id: product.id, qty: 1, priceHistory: [product.price] }];
+//       }
+//     });
+//   }
+
+
+
+//   function removeFromCart(id) {
+//     setCart(prevCart => prevCart.filter(item => item.id !== id));
+//   }
+//   function updateQuantity(id, amount) {
+//     setCart(prevCart =>
+//       prevCart.map(item => {
+//         if (item.id === id) {
+//           const newQty = Math.max(1, item.qty + amount);
+//           return { ...item, qty: newQty };
+//         }
+//         return item;
+//       })
+//     );
+//   }
+
+
+//   function updatePrice(id) {
+//     setProducts(prevProducts =>
+//       prevProducts.map(p => {
+//         if (p.id === id) {
+
+//           // 👇 YAHAN lagana hai
+//           const discountedPrice = Math.round(p.originalPrice * 0.9);
+
+//           return {
+//             ...p,
+//             price: discountedPrice
+//           };
+//         }
+//         return p;
+//       })
+//     );
+//   }
+// function togglePrice(id) {
+//   setProducts(prev =>
+//     prev.map(p => {
+//       if (p.id === id) {
+//         const options = p.priceOptions || [];
+//         const discountPrice = Math.round(p.originalPrice * 0.9);
+//         const steps = [p.originalPrice, discountPrice, ...options];
+//         let nextIndex = (p.toggleIndex ?? -1) + 1;
+//         if (nextIndex >= steps.length) nextIndex = 0;
+//         return { ...p, toggleIndex: nextIndex, currentPrice: steps[nextIndex] };
+//       }
+//       return p;
+//     })
+//   );
+// }
+//   function togglePrice(id) {
+//   setProducts(prev =>
+//     prev.map(p => {
+//       if (p.id === id) {
+//         const options = p.priceOptions || [];
+//         const discountPrice = Math.round(p.originalPrice * 0.9);
+//         const steps = [p.originalPrice, discountPrice, ...options];
+//         let nextIndex = (p.toggleIndex ?? -1) + 1;
+//         if (nextIndex >= steps.length) nextIndex = 0;
+//         return { ...p, toggleIndex: nextIndex, currentPrice: steps[nextIndex] };
+//       }
+//       return p;
+//     })
+//   );
+
+//   // Cart me bhi update karo currentPrice
+//   setCart(prevCart =>
+//     prevCart.map(item => {
+//       if (item.id === id) {
+//         const prod = products.find(p => p.id === id);
+//         return { ...item, currentPrice: prod.currentPrice };
+//       }
+//       return item;
+//     })
+//   );
+// }
+// function togglePrice(id) {
+//   setProducts(prevProducts =>
+//     prevProducts.map(p => {
+//       if (p.id === id) {
+//         const options = p.priceOptions || [];
+//         const discountPrice = Math.round(p.originalPrice * 0.9);
+
+//         // Cycle steps: Original -> Discount -> Options...
+//         const steps = [p.originalPrice, discountPrice, ...options];
+
+//         let nextIndex = (p.toggleIndex ?? -1) + 1;
+//         if (nextIndex >= steps.length) nextIndex = 0;
+
+//         return {
+//           ...p,
+//           toggleIndex: nextIndex,
+//           price: steps[nextIndex],
+//         };
+//       }
+//       return p;
+//     })
+//   );
+// }
+// function togglePrice(id) {
+//   setProducts(prevProducts =>
+//     prevProducts.map(p => {
+//       if (p.id === id) {
+
+//         const options = p.priceOptions || [];
+//         const totalSteps = options.length + 1;
+
+//         // next index
+//         let nextIndex = (p.toggleIndex ?? -1) + 1;
+
+//         if (nextIndex >= totalSteps) {
+//           nextIndex = 0;
+//         }
+
+//         let newPrice;
+
+//         if (nextIndex === 0) {
+//           // 👉 original price
+//           newPrice = p.originalPrice;
+//         } else {
+//           // 👉 options se price
+//           newPrice = options[nextIndex - 1];
+//         }
+
+//         return {
+//           ...p,
+//           toggleIndex: nextIndex,
+//           price: newPrice
+//         };
+//       }
+//       return p;
+//     })
+//   );
+// }
+
+
+
+//   return (
+//     <Router>
+
+//       <Header cartCount={cart.reduce((acc, item) => acc + item.qty, 0)} />
+
+//       <Routes>
+//         <Route
+//           path="/"
+//           element={
+//             <Home
+//               products={products}
+//               addToCart={addToCart}
+//               updatePrice={updatePrice}
+//               togglePrice={togglePrice}
+//             />
+//           }
+//         />
+
+//         <Route
+//           path="/cart"
+//           element={
+//             <Cart
+//               cart={cart}
+//               products={products}
+//               updateQuantity={updateQuantity}
+//               removeFromCart={removeFromCart}
+//             />
+//           }
+//         />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
+//   function togglePrice(id) {
+//   setProducts(prevProducts =>
+//     prevProducts.map(p => {
+//       if (p.id === id) {
+
+//         // ✅ fallback
+//         const options = p.priceOptions || [];
+
+//         let nextIndex = (p.toggleIndex ?? -1) + 1;
+
+//         const totalSteps = options.length + 1;
+
+//         if (nextIndex >= totalSteps) nextIndex = 0;
+
+//         let newPrice;
+
+//         if (nextIndex === 0) {
+//           newPrice = p.originalPrice;
+//         } else {
+//           newPrice = options[nextIndex - 1];
+//         }
+
+//         return {
+//           ...p,
+//           toggleIndex: nextIndex,
+//           price: newPrice
+//         };
+//       }
+//       return p;
+//     })
+//   );
+// }
+
+
+
+// function addToCart(product) {
+//   const exist = cart.find(item => item.id === product.id);
+
+//   if (exist) {
+//     setCart(cart.map(item => item.id === product.id
+//       ? {
+//         ...item,
+//         qty: item.qty + 1,
+//         priceHistory: [...item.priceHistory, product.price]
+//       }
+//       : item
+//     ));
+//   } else {
+//     setCart([...cart, {id: product.id, qty: 1, priceHistory: [product.price]}])
+//   }
+// }
+
+
+
+// function removeFromCart(id) {
+//   setCart(cart.filter(item => item.id !== id));
+// }
+// function updateQuantity(id, amount) {
+//   setCart(cart.map(item => {
+//     if (item.id === id) {
+//       const newQty = Math.max(1, item.qty + amount)
+//       return {
+//         ...item,
+//         qty: newQty
+
+//       };
+//     } else {
+//       return item;
+//     }
+//   }));
+// }
+
+// function updatePrice(id, newPrice) {
+//   setProducts(products.map(p => p.id === id ? { ...p, price: newPrice } : p));
+// }
+// function togglePrice(id) {
+//   setProducts(products.map(p =>
+//     p.id === id ? { ...p, price: p.price === 5000 ? p.originalPrice : 5000 } : p
+//   ));
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Cart
+
+
+// import "./Cart.css";
+
+// function Cart({ cart, products, updateQuantity, removeFromCart, togglePrice }) {
+
+//   const cartWithDetails = cart.map(item => {
+//     const product = products.find(p => p.id === item.id);
+//     if (!product) return null;
+
+//     return {
+//       ...product,
+//       ...item,
+//       qty: item.qty,
+//       priceHistory: item.priceHistory || [product.price]
+//     };
+//   }).filter(Boolean);
+
+//   const totalPrice = cartWithDetails.reduce(
+//     (acc, item) => acc + (item.currentPrice ?? item.price) * item.qty,
+//     0
+//   );
+
+//   return (
+//     <div className="cart-container">
+//       <h2>Your Cart</h2>
+
+//       {cartWithDetails.length === 0 && (
+//         <p className="empty">Cart is empty</p>
+//       )}
+
+//       {cartWithDetails.map((item) => {
+//         const price = item.currentPrice ?? item.price;
+//         const itemTotal = price * item.qty;
+
+//         return (
+//           <div key={item.id} className="cart-item">
+
+//             {/* IMAGE + INFO */}
+//             <div className="cart-image">
+//               <img src={item.image} alt={item.name} className="slide-img" />
+// {/* 
+//               <h4>{item.name}</h4>
+//               <p>Quantity: {item.qty}</p>
+//               <p>Price: ${price}</p>
+
+//               <p style={{ fontSize: "12px", color: "#777" }}>
+//                 Original Prices:{" "}
+//                 {[item.originalPrice, ...(item.priceOptions || [])].join(", ")}
+//               </p> */}
+//             </div>
+
+//             {/* DETAILS */}
+//             <div className="cart-details">
+//               <span className="cart-name">{item.name}</span>
+//               <span className="cart-price">${itemTotal}</span>
+//               <span className="cart-qty">
+//                 Qty: <span className="qty-number">{item.qty}</span>
+//               </span>
+//             </div>
+
+            
+//             <div className="qty-buttons">
+//                <button onClick={() => updateQuantity(item.id, item.qty - 1)}>-</button>
+//                <span className="qty-number">{item.qty}</span> 
+//   <button onClick={() => updateQuantity(item.id, item.qty + 1)}>+</button>
+  
+ 
+//   <button className="remove-btn" onClick={() => removeFromCart(item.id)}>Remove</button>
+//   <button className="toggle-btn" onClick={() => togglePrice(item.id)}>Toggle</button>
+// </div>
+            
+          
+
+//           </div>
+//         );
+//       })}
+
+//       {cartWithDetails.length > 0 && (
+//         <h3 className="total">Total: ${totalPrice}</h3>
+//       )}
+//       {cartWithDetails.length > 0 && (
+//   <div className="cart-summary">
+//     <span>Total Items: {cartWithDetails.reduce((acc, item) => acc + item.qty, 0)}</span>
+    
+//   </div>
+// )}
+//     </div>
+    
+//   );
+// }
+
+// export default Cart;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import './Cart.css'
+
+// function Cart({ cart, products, updateQuantity, removeFromCart, togglePrice }) {
+//   const cartWithDetails = cart.map(item => {
+//     const product = products.find(p => p.id === item.id);
+//     if (!product) return null;
+//     return {
+//       ...product,
+//       ...item,
+      
+//         qty: item.qty,
+//       priceHistory: item.priceHistory || [product.price]
+//     };
+//   }).filter(Boolean);
+
+//   const totalPrice = cartWithDetails.reduce((acc, item) => acc + (item.currentPrice ?? item.price) * item.qty, 0);
+
+//   return (
+//    <div className="cart-container">
+//       <h2>Your Cart</h2>
+//       {cartWithDetails.length === 0 && <p className="empty">Cart is empty</p>}
+
+//       {cartWithDetails.map((item) => {
+//        const price = item.currentPrice ?? item.price;
+// const itemTotal = price * item.qty;
+       
+//        // const lastPrice = item.price;
+//         // // const lastPrice = item.priceHistory[item.priceHistory.length - 1];
+//         // const itemTotal = lastPrice * item.qty;
+
+//         return (    
+//               <div key={item.id} className="cart-item">
+//                 <div className='cart-image'>
+//           {/* 🔥 Image added */}
+//           <img src={item.image} alt={item.name} className="slide-img" />
+          
+//           <h4>{item.name}</h4>
+//           <p>Quantity: {item.qty}</p>
+//           {/* <p>Price: ${item.currentPrice ?? item.price}</p> */}
+//           <p>Price: ${item.currentPrice ?? item.price}</p>
+//           <p>
+// <p>Price: ${price}</p>
+// <span className="cart-price">${itemTotal}</span>
+//             Original Prices: {[item.originalPrice, ...(item.priceOptions || [])].join(", ")}
+//           </p>
+//           </div>
+          
+//  <div className="cart-details">
+//               <span className="cart-name">{item.name}</span>
+//               <span className="cart-price"> ${itemTotal}</span>
+//               <span className="cart-qty">
+//                 Qty: <span className="qty-number">{item.qty}</span>
+//               </span>
+//             </div>
+            
+//             <div className='qty-buttons'> 
+//             <button onClick={() => updateQuantity(item.id, item.qty + 1)}>+</button> 
+//             <span>{item.qty}</span>
+//             <button onClick={() => updateQuantity(item.id, item.qty - 1)}>-</button>
+//             <button onClick={() => removeFromCart(item.id)}>Remove</button>
+//             <button onClick={() => togglePrice(item.id)}>Toggle Price</button>
+//           </div>
+//           </div>
+//           )
+//           })}
+
+//       {cartWithDetails.length > 0 && <h3 className="total"> Total: ${totalPrice}</h3>}
+//     </div>
+//   );
+// }
+
+// export default Cart;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import "./Cart.css"
+
+// function Cart({ cart, products, updateQuantity, removeFromCart }) {
+//   const cartWithDetails = cart.map(item =>{
+//     const product = products.find((p) => p.id === item.id);
+//     return {
+//       ...product,
+//       qty: item.qty,
+//       priceHistory: item.priceHistory || [product.price]
+//     };
+//   });
+
+//   const totalPrice = cartWithDetails.reduce((acc, item) => {
+//     const lastPrice = item.priceHistory[item.priceHistory.length - 1]
+//     return acc + lastPrice * item.qty;
+//   }, 0);
+
+//   return (
+//     <div className="cart-container">
+//       <h2>Your Cart</h2>
+//       {cartWithDetails.length === 0 && <p className="empty">Cart is empty</p>}
+
+//       {cartWithDetails.map((item) => {
+//         const lastPrice = item.priceHistory[item.priceHistory.length - 1];
+//         const itemTotal = lastPrice * item.qty;
+
+//         // Correct image logic
+//         const imageSrc = lastPrice === 5000 ? item.image : item.image;
+
+//         return (
+//           <div key={item.id} className="cart-item">
+//             <div className="cart-image">
+//               <img src={imageSrc} alt={item.name} className="slide-img" />
+//             </div>
+
+//             <div className="cart-details">
+//               <span className="cart-name">{item.name}</span>
+//               <span className="cart-price"> ${itemTotal}</span>
+//               <span className="cart-qty">
+//                 Qty: <span className="qty-number">{item.qty}</span>
+//               </span>
+//             </div>
+
+//             <div className="qty-buttons">
+//               <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+//               <span>{item.qty}</span>
+//               <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+//             </div>
+
+//             <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+//               Remove
+//             </button>
+//           </div>
+//         );
+//       })}
+
+//       {cartWithDetails.length > 0 && <h3 className="total">Total: ${totalPrice}</h3>}
+//     </div>
+//   );
+// }
+
+// export default Cart;
+// import "./Cart.css";
+
+// function Cart({ cart, products, updateQuantity, removeFromCart }) {
+
+//   const cartWithDetails = cart.map(item => {
+//     const product = products.find(p => p.id === item.id)
+
+//     return {
+//       ...product,
+//       qty: item.qty,
+//       priceHistory: item.priceHistory || [product.price]
+//     };
+//   });
+
+//   const totalPrice = cartWithDetails.reduce((acc, item) => {
+//     const lastPrice =
+//       item.priceHistory[item.priceHistory.length - 1];
+//     return acc + lastPrice * item.qty;
+//   }, 0);
+
+//   return (
+//     <div className="cart-container">
+//       <h2>Your Cart</h2>
+
+//       {cartWithDetails.length === 0 && (
+//         <p className="empty">Cart is empty</p>
+//       )}
+
+//       {cartWithDetails.map(item => {
+
+//         const lastPrice =
+//           item.priceHistory[item.priceHistory.length - 1];
+
+//         const itemTotal = lastPrice * item.qty;
+
+//         // ⭐ IMAGE LOGIC
+//         const imageSrc =
+//           lastPrice === 5000
+//             ? item.image
+//             : item.image;
+//         // const imageSrc =
+//         //   lastPrice === 5000
+//         //     ? "/img2.png"
+//         //     : "/img1.png";
+
+//         return (
+//           <div key={item.id} className="cart-item">
+//             <div className="cart-image">
+//               <img
+//                 src={imageSrc}
+//                 alt={item.name}
+//                 className="slide-img"
+//               />
+//             </div>
+
+//             <div className="cart-details">
+//               <span className="cart-name">{item.name}</span>
+//               <span className="cart-price"> ${itemTotal}</span>
+//               <span className="cart-qty">Qty:
+//                 <span className="qty-number">{item.qty}</span>
+//               </span>
+//             </div>
+
+//             <div className="qty-buttons">
+//               <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+//               <span>{item.qty}</span>
+//               <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+//             </div>
+
+//             <button
+//               className="remove-btn"
+//               onClick={() => removeFromCart(item.id)}
+//             >
+//               Remove
+//             </button>
+//           </div>
+//         );
+//       })}
+
+//       {cartWithDetails.length > 0 && (
+//         <h3 className="total">Total: ${totalPrice}</h3>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Cart;
+// import "./Cart.css";
+
+// function Cart({ cart, products, updateQuantity, removeFromCart }) {
+
+//   const cartWithDetails = cart.map(item => {
+//     const product = products.find(p => p.id  === item.id)
+
+//     return {
+//       ...product,
+//       qty: item.qty,
+//       priceHistory: item.priceHistory || [product.price]
+//     };
+//   });
+
+//   // ✅ Total = last price * qty
+//   const totalPrice = cartWithDetails.reduce((acc, item) => {
+//     const lastPrice =
+//       item.priceHistory[item.priceHistory.length - 1];
+//     return acc + lastPrice * item.qty;
+//   }, 0);
+
+//   return (
+//     <div className="cart-container">
+//       <h2>Your Cart</h2>
+
+//       {cartWithDetails.length === 0 && (
+//         <p className="empty">Cart is empty</p>
+//       )}
+
+//       {cartWithDetails.map(item => {
+
+//         const lastPrice =
+//           item.priceHistory[item.priceHistory.length - 1];
+
+//         const itemTotal = lastPrice * item.qty; // ✅ NO reduce here
+
+//         return (
+//           <div key={item.id} className="cart-item">
+//             <div className="cart-image">
+//               <img src={item.image} alt={item.name} />
+//             </div>
+
+//             <div className="cart-details">
+//               <span className="cart-name">{item.name}</span>
+//               <span className="cart-price"> ${itemTotal}</span>
+//               <span className="cart-qty">Qty:
+//                 <span className="qty-number">{item.qty}</span>
+//               </span>
+//             </div>
+
+//             <div className="qty-buttons">
+//               <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+//               <span>{item.qty}</span>
+//               <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+//             </div>
+
+//             <button
+//               className="remove-btn"
+//               onClick={() => removeFromCart(item.id)}
+//             >
+//               Remove
+//             </button>
+//           </div>
+//         );
+//       })}
+
+//       {cartWithDetails.length > 0 && (
+//         <h3 className="total">Total: ${totalPrice}</h3>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Cart;
+// import "./Cart.css";
+
+// function Cart({ cart, products, updateQuantity, removeFromCart }) {
+//   const cartWithDetails = cart.map(item => {
+//     const product = products.find(p => p.id === item.id);
+//     return { ...product, qty: item.qty, priceHistory: item.priceHistory };
+//   });
+//   // const cartWithDetails = cart.map(item => {
+//   //   const product = products.find(p => p.id === item.id);
+//   //   return {
+//   //     ...product,
+//   //     qty: item.qty,
+//   //     priceHistory: item.priceHistory
+//   //   };
+//   // });
+//   const totalPrice = cartWithDetails.reduce(
+//     (acc, item) => acc + item.priceHistory[item.priceHistory.length - 1] * item.qty,
+//     0
+//   );
+
+
+
+
+//   return (
+//     <div className="cart-container">
+//       <h2>Your Cart</h2>
+//       {cart.map((item) => (
+//         <div key={item.id}>
+
+//         </div>
+//       ))}
+//       {cartWithDetails.length === 0 && <p className="empty">Cart is empty</p>}
+
+//       {cartWithDetails.map(item => {
+//         const itemTotal = (item.priceHistory || [item.price]).reduce((a, b) => a + b, 0);
+
+
+//         return (
+//           <div key={item.id} className="cart-item">
+//             <div className="cart-image">
+//               <img src={item.image} alt={item.name} />
+//             </div>
+
+//             <div className="cart-details">
+//               <span className="cart-name">{item.name}</span>
+//               <span className="cart-price"> ${itemTotal}</span>
+//               <span className="cart-qty">Qty: {item.qty}</span>
+//             </div>
+//             <div className="qty-buttons">
+//               <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+//               <span>{item.qty}</span>
+//               <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+//             </div>
+
+//             <button
+//               className="remove-btn"
+//               onClick={() => removeFromCart(item.id)}
+//             >
+//               Remove
+//             </button>
+//           </div>
+//         );
+//       })}
+
+//       {cartWithDetails.length > 0 && (
+//         <h3 className="total">Total: ${totalPrice}</h3>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Cart;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Home///
+
+
+
+// import './Home.css'
+// function Home({ products, addToCart, togglePrice }) {
+//   return (
+//     <div className="home-container">
+//       {products.map(product => (
+//         <div key={product.id} className="product-card">
+//           <img src={product.image} alt={product.name} />
+//           <h3>{product.name}</h3>
+
+//           <p>Price: ${product.currentPrice ?? product.price}</p>
+       
+
+//           <button onClick={() => addToCart(product.id)}>Add to Cart</button>
+//           <button onClick={() => togglePrice(product.id)}>Toggle Price</button>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice, togglePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="product-name">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map(product => {
+//           const imageSrc = product.image;
+
+
+//           const discount =
+//          product.price < product.originalPrice
+//     ? Math.round(
+//         ((product.originalPrice - product.price) / product.originalPrice) * 100
+//       )
+//     : 0;
+//           // ✅ Safe discount calculation
+//   //         const discount =
+//   // product.price < product.originalPrice
+//   //   ? Math.round(
+//   //       ((product.originalPrice - product.price) / product.originalPrice) * 100
+//   //     )
+//   //   : 0;
+//           return (
+//             <div key={product.id} className="product-card">
+//               <div className="product-image">
+//                 <img src={imageSrc} alt={product.name} className="slide-img" />
+
+//                 {/* Premium badge */}
+//                 {product.name.includes("Premium") && <span className="badge-premium"></span>}
+
+//                 {/* Discount badge */}
+//                 {discount > 0 && <span className="badge-discount">{discount}% OFF</span>}
+//               </div>
+
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               <div className="button-group">
+//                 <p>Price: ${product.currentPrice}</p>
+//         <p>Original Prices: {product.originalPrices?.join(", ")}</p>
+//         <p>Price: ${product.currentPrice ?? product.originalPrice}</p>
+// <p>Original Prices: {[product.originalPrice, ...(product.priceOptions || [])].join(", ")}</p>
+// <button onClick={() => togglePrice(product.id)}>Toggle Price</button>
+//                 <button className="add-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+//                 <button
+//                    className="price-btn"
+//                    onClick={() => updatePrice(product.id)}
+//                 >
+//                 Update Price
+//                 </button>
+//                 {/* <button className="price-btn" onClick={() => updatePrice(product.id, 4500)}>Update Price</button> */}
+//                 <button className="toggle-btn" onClick={() => togglePrice(product.id)}>Toggle Price</button>
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice, togglePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="product-name">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map(product => {
+//   const imageSrc = product.image;
+
+//   // Calculate discount if any
+//   const discount =
+//   product.priceOptions && product.priceOptions.length > 0
+//     ? product.price < product.priceOptions[0]
+//       ? Math.round(((product.priceOptions[0] - product.price) / product.priceOptions[0]) * 100)
+//       : 0
+//     : 0;
+//   return (
+//     <div key={product.id} className="product-card">
+//       <div className="product-image">
+//         <img src={imageSrc} alt={product.name} className="slide-img" />
+
+//         {/* Premium badge */}
+//         {product.name.includes("Premium") && <span className="badge-premium"></span>}
+
+//         {/* Discount badge */}
+//         {discount > 0 && <span className="badge-discount">{discount}% OFF</span>}
+//       </div>
+
+//       <h3 className="product-name">{product.name}</h3>
+//       <p className="product-price">${product.price}</p>
+
+//       <div className="button-group">
+//         <button className="add-btn" onClick={() => addToCart(product)}>
+//           Add to Cart
+//         </button>
+//         <button className="price-btn" onClick={() => updatePrice(product.id, 9999)}>
+//           Update Price
+//         </button>
+//         <button className="toggle-btn" onClick={() => togglePrice(product.id)}>
+//           Toggle Price
+//         </button>
+//       </div>
+//     </div>
+//   );
+// })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice, togglePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="product-name">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map((product) => {
+//           const imageSrc = product.image
+
+//           return (
+//             <div key={product.id} className="product-card">
+            
+//                {product.name.includes("Premium") && (
+//     <span className="badge-premium">🔥 Premium</span>
+//             )}
+//               <div className="product-image">
+//                 <img src={imageSrc} alt={product.name} className="slide-img" />
+//               </div>
+
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               <div className="button-group">
+//                 <button className="add-btn" onClick={() => addToCart(product)}>
+//                   Add to Cart
+//                 </button>
+
+//                 <button
+//                   className="update-btn"
+//                   onClick={() => updatePrice(product.id, 3000)}
+//                 >
+//                   Update Price
+//                 </button>
+
+//                 <button
+//                   className="toggle-btn"
+//                   onClick={() => togglePrice(product.id)}
+//                 >
+//                   Toggle Price
+//                 </button>
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice, togglePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="product-name">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map((product) => {
+//           // Decide which image to show (use image2 if exists, otherwise image)
+//           const imageSrc = product.image2 || product.image;
+
+//           return (
+//             <div key={product.id} className="product-card">
+//               {/* IMAGE */}
+//               <div className="product-image">
+//                 <img
+//                   src={imageSrc}
+//                   alt={product.name}
+//                   className="slide-img"
+//                 />
+//               </div>
+
+//               {/* NAME & PRICE */}
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               {/* ONLY ADD TO CART BUTTON */}
+//               <div className="button-group">
+//                 <button
+//                   className="add-btn"
+//                   onClick={() => addToCart(product)}
+//                 >
+//                   Add to Cart
+//                 </button>
+
+//                 <button className="update-btn" onClick={() => updatePrice(product.id, 9999)}>
+//                   Update Price
+//                 </button>
+//                 <button className="toggle-btn" onClick={() => togglePrice(product.id)}>
+//                   Toggle Price
+//                 </button>
+//               </div>
+//             </div>
+            
+//       );
+//         })}
+//     </div>
+//     </div >
+//   );
+// }
+
+// export default Home;
+
+
+
+
+// import { useState } from "react";
+// import "./Home.css";
+
+// function Home({ products, addToCart}) {
+//   const [fadeImg, setFadeImg] = useState({});
+
+//   // const handleToggle = (id) => {
+//   //   setFadeImg(prev => ({ ...prev, [id]: true }));
+
+//   //   setTimeout(() => {
+//   //     togglePrice(id);
+//   //     setFadeImg(prev => ({ ...prev, [id]: false }));
+//   //   }, 250);
+//   // };
+
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map((product) => {
+
+//           const imageSrc =
+//             product.price === 5000 ? product.image : product.image;
+
+//           // const buttonText =
+//           //   product.price === 5000
+//           //     ? `Make ${product.originalPrice}`
+//           //     : "Make 5000";
+
+//           return (
+//             <div key={product.id} className="product-card">
+
+//               <div className="product-image">
+//                 <img
+//                   src={imageSrc}
+//                   alt={product.name}
+//                   className={`slide-img ${fadeImg[product.id] ? "fade" : ""}`}
+//                 />
+//               </div>
+
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               <div className="button-group">
+//                 <button
+//                   className="add-btn"
+//                   onClick={() => addToCart(product)}
+//                 >
+//                   Add to Cart
+//                 </button>
+
+//                 {/* <button
+//                   className="price-btn"
+//                   onClick={() => handleToggle(product.id)}
+//                 >
+//                   {buttonText}
+//                 </button> */}
+//               </div>
+
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import { useState } from "react";
+// import "./Home.css";
+
+// function Home({ products, addToCart, togglePrice }) {
+//   const [fadeImg, setFadeImg] = useState({}); // track fade state per product
+
+//   const handleToggle = (id) => {
+//     // Start fade-slide animation
+//     setFadeImg(prev => ({ ...prev, [id]: true }));
+
+//     setTimeout(() => {
+//       togglePrice(id); // actual price & image toggle
+//       // Remove fade-slide → image slides back
+//       setFadeImg(prev => ({ ...prev, [id]: false }));
+//     }, 300); // match transition duration
+//   };
+
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+//       <div className="home-container">
+//         {products.map((product) => {
+//           const imageSrc = product.price === 5000 ? product.image2 : product.image;
+//           const buttonText = product.price === 5000
+//             ? `Make ${product.originalPrice}`
+//             : "Make 5000";
+
+//           return (
+//             <div key={product.id} className="product-card">
+//               <div className="product-image">
+//                 <img
+//                   src={imageSrc}
+//                   alt={product.name}
+//                   className={`slide-img ${fadeImg[product.id] ? "fade-slide" : ""}`}
+//                 />
+//               </div>
+
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               <div className="button-group">
+//                 <button className="add-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+//                 <button className="price-btn" onClick={() => handleToggle(product.id)}>
+//                   {buttonText}
+//                 </button>
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, togglePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map((product) => {
+//           const imageSrc = product.price === 5000 ? product.image2 : product.image;
+//           const buttonText = product.price === 5000
+//             ? `Make ${product.originalPrice}`
+//             : "Make 5000";
+
+//           return (
+//             <div key={product.id} className="product-card">
+//               <div className="product-image">
+//                 <img src={imageSrc} alt={product.name} className="slide-img" />
+//               </div>
+
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               <div className="button-group">
+//                 <button className="add-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+//                 <button className="price-btn" onClick={() => togglePrice(product.id)}>{buttonText}</button>
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import { useState } from "react";
+// import "./Home.css";
+
+// function Home({ products, addToCart, togglePrice }) {
+//   const [localProducts, setLocalProducts] = useState(products);
+
+//   const togglePrice = (id) => {
+//     setLocalProducts(
+//       localProducts.map((p) => {
+//         if (p.id === id) {
+//           const newPrice = p.price === 5000 ? (p.originalPrice || 50) : 5000;
+//           return { ...p, price: newPrice };
+//         }
+//         return p;
+//       })
+//     );
+//   };
+
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {localProducts.map((product) => {
+//           const imageSrc = product.price === 5000 ? product.image2 : product.image;
+//           const buttonText =
+//             product.price === 5000
+//               ? `Make ${product.originalPrice || 50}`
+//               : "Make 5000";
+
+//           return (
+//             <div key={product.id} className="product-card">
+//               <div className="product-image">
+//                 <img src={imageSrc} alt={product.name} className="slide-img" />
+//               </div>
+
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-price">${product.price}</p>
+
+//               <div className="button-group">
+//                 <button className="add-btn" onClick={() => addToCart(product)}>
+//                   Add to Cart
+//                 </button>
+
+//                 <button className="price-btn" onClick={() => togglePrice(product.id)}>
+//                   {buttonText}
+//                 </button>
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map((product) => {
+//           const imageSrc =
+//             product.price === 5000
+//               ? product.image
+//               : product.image;
+
+//           // const imageSrc =
+//           //   product.price === 5000
+//           //     ? "/img2.png"
+//           //     : "/img1.png";
+
+//           return (
+//             <div key={product.id} className="product-card">
+
+//               <div className="product-image">
+//                 <img
+//                   src={imageSrc}
+//                   alt={product.name}
+//                   className="slide-img"
+//                 />
+//               </div>
+
+//               <h3 className="product-name">
+//                 {product.name}
+//               </h3>
+
+//               <p className="product-price">
+//                 ${product.price}
+//               </p>
+
+//               <div className="button-group">
+//                 <button
+//                   className="add-btn"
+//                   onClick={() => addToCart(product)}
+//                 >
+//                   Add to Cart
+//                 </button>
+
+//                 <button
+//                   className="price-btn"
+//                   onClick={() => updatePrice(product.id, 5000)}
+//                 >
+//                   Make 5000
+//                 </button>
+//               </div>
+
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map((product) => (
+//           <div key={product.id} className="product-card">
+
+//             <div className="product-image">
+//               <img
+//                 src={product.image}
+//                 alt={product.name}
+//               />
+//             </div>
+
+//             <h3 className="product-name">
+//               {product.name}
+//             </h3>
+
+//             <p className="product-price">
+//               ${product.price}
+//             </p>
+
+//             <div className="button-group">
+//               <button
+//                 className="add-btn"
+//                 onClick={() => addToCart(product)}
+//               >
+//                 Add to Cart
+//               </button>
+
+//               <button
+//                 className="price-btn"
+//                 onClick={() => updatePrice(product.id, 5000)}
+//               >
+//                 Make 5000
+//               </button>
+//             </div>
+
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// // import ProductCard from "../Components/ProductCard";
+
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map(product => (
+//           <div key={product.id} className="product-card">
+
+//             {/* 🔥 PRODUCT IMAGE */}
+//             <div className="product-image">
+//               <img src={product.image} alt={product.name} />
+//             </div>
+
+//             <h3>{product.name}</h3>
+//             <p className="product-price">${product.price}</p>
+//             <div className="button-group">
+//               <button
+//                 onClick={() => addToCart(product)}
+//                 className="add-btn"
+//               >
+//                 Add to Cart
+//               </button>
+
+//               <button
+//                 onClick={() => updatePrice(product.id, 5000)}
+//                 className="price-btn"
+//               >
+//                 5000 Price
+//               </button>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// import ProductCard from "../Components/ProductCard";
+// import "./Home.css";
+
+// function Home({ products, addToCart, updatePrice }) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+
+//       <div className="home-container">
+//         {products.map(product => (
+//           <div key={product.id}>
+//             <h3>{product.name}</h3>
+//             <p>${product.price}</p>
+
+//             <button onClick={() => addToCart(product)}>
+//               Add to Cart
+//             </button>
+
+//             {/* 🔥 PRICE CHANGE BUTTON */}
+//             <button onClick={() => updatePrice(product.id, 5000)}>
+//               5000
+//             </button>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+// 2
+// import products from "../Data/Product";
+// import ProductCard from "../Components/ProductCard";
+// import "./Home.css";
+
+// function Home({ addToCart}) {
+//   return (
+//     <div className="home-wrapper">
+//       <h2 className="home-title">Our Products</h2>
+//       <div className="home-container">
+//         {products.map(product => (
+//           <ProductCard
+//             key={product.id}
+//             product={product}
+//             addToCart={addToCart}
+//           />
+//         ))}
+// {products.map(product => (
+//   <div key={product.id}>
+//     <h3>{product.name}</h3>
+//     <p>${product.price}</p>
+
+//     <button onClick={() => addToCart(product)}>
+//       Add to Cart
+//     </button>
+
+//     {/* 🔥 PRICE CHANGE BUTTON */}
+//     <button onClick={() => updatePrice(product.id, 5000)}>
+//       5000
+//     </button>
+//   </div>
+// ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+// import products from "../Data/Product";
+// import ProductCard from "../Components/ProductCard";
+// import "./Home.css";
+// function Home({ addToCart }) {
+//   return (
+//     <div className="home-wrapper">
+//     <h2 className="home-title">Our Products</h2>
+//       <div className="home-container">
+//       {products.map(product => (
+//         <ProductCard
+//           key={product.id}
+//           product={product}
+//           addToCart={addToCart}
+//         />
+//       ))}
+//     </div>
+//     </div>
+//   );
+// }
+
+// export default Home;
